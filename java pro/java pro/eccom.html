@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Varnikaa</title>
+  <style>
+    body { margin:0; font-family:Arial, sans-serif; }
+    .nav { background:#f8f8f8; padding:15px; display:flex; align-items:center; gap:20px; }
+    .nav a { text-decoration:none; color:brown; font-weight:bold; }
+    .slider { overflow:hidden; width:100%; height:400px; position:relative; }
+    .slide { display:flex; transition:transform 1s ease-in-out; }
+    .slide img { width:100vw; height:400px; object-fit:cover; }
+    #offer { font-size:40px; text-align:center; color:crimson; margin:30px 0; }
+    .feature, .fashion { padding:40px; }
+    .fbox, .fabox { display:inline-block; margin:20px; text-align:center; }
+    .fbox img, .fabox img { width:200px; height:220px; border-radius:8px; box-shadow:0 0 5px #aaa; }
+    .footer { background:#222; color:#eee; padding:30px; display:flex; justify-content:space-around; flex-wrap:wrap; }
+    .footer a { color:#ddd; text-decoration:none; display:block; margin:5px 0; }
+    .footer img { margin:5px; border-radius:50%; }
+    .dark-mode { background:#111; color:#eee; }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="nav">
+    <h2 style="color:brown;">Varnikaa</h2>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Shop</a>
+    <a href="#">Cart</a>
+    <a href="#">Login</a>
+    <input type="text" placeholder="Search" style="margin-left:auto; padding:5px;">
+    <i id="darkModeToggle" class="fas fa-moon" style="cursor:pointer;"></i>
+  </div>
+
+  <!-- Slider -->
+  <div class="slider">
+    <div class="slide" id="slideContainer">
+      <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=1600" alt="">
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=1600" alt="">
+      <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47?w=1600" alt="">
+    </div>
+  </div>
+
+  <p id="offer">Flat 50% Off on Summer Collection!</p>
+
+  <!-- Feature Products -->
+  <div class="feature">
+    <h2>Feature Products</h2>
+    <div class="fbox">
+      <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600">
+      <p>Stylish T-Shirts</p>
+    </div>
+    <div class="fbox">
+      <img src="https://images.unsplash.com/photo-1621184455862-d3d1b5da3b4c?w=600">
+      <p>Kurta Set</p>
+    </div>
+    <div class="fbox">
+      <img src="https://images.unsplash.com/photo-1609838466075-6066db7a9c84?w=600">
+      <p>Silk Saree</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div>
+      <h2>Varnikaa</h2>
+      <p>&copy; 2025 Varnikaa. All rights reserved</p>
+    </div>
+    <div>
+      <p>Quick Links</p>
+      <a href="#">Shipping</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div>
+      <p>Follow Us</p>
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="40">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="40">
+    </div>
+  </div>
+
+  <script>
+    // Slider
+    const slideContainer = document.getElementById("slideContainer");
+    const slides = slideContainer.querySelectorAll("img");
+    let index = 0;
+    function showNextSlide() {
+      index++;
+      if (index >= slides.length) index = 0;
+      slideContainer.style.transform = `translateX(-${index * 100}vw)`;
+    }
+    setInterval(showNextSlide, 3000);
+
+    // Dark mode
+    const toggleIcon = document.getElementById("darkModeToggle");
+    toggleIcon.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      toggleIcon.classList.toggle("fa-sun");
+      toggleIcon.classList.toggle("fa-moon");
+    });
+  </script>
+
+</body>
+</html>

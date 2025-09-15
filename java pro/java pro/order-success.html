@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Order Confirmed</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">TechStore</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon">
+                            🛒
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="success-section">
+            <div class="success-content">
+                <div class="success-icon">✅</div>
+                <h1>Order Confirmed!</h1>
+                <p>Thank you for your purchase. Your order has been successfully placed.</p>
+                
+                <div class="order-details" id="orderDetails">
+                    <!-- Order details will be loaded here -->
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="products.html" class="continue-shopping-btn">Continue Shopping</a>
+                    <a href="index.html" class="home-btn">Back to Home</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 TechStore. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function displayOrderDetails() {
+            const orderData = JSON.parse(localStorage.getItem('lastOrder') || '{}');
+            const detailsContainer = document.getElementById('orderDetails');
+            
+            if (!orderData.orderNumber) {
+                detailsContainer.innerHTML = `
+                    <div class="no-order">
+                        <p>No recent order found.</p>
+                        <a href="products.html" class="shop-now-btn">Start Shopping</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            const total = orderData.items.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 5.99 + (orderData.items.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 0.08);
+            
+            detailsContainer.innerHTML = `
+                <div class="order-info">
+                    <div class="order-number">
+                        <strong>Order Number: ${orderData.orderNumber}</strong>
+                    </div>
+                    <div class="order-date">
+                        <strong>Order Date: ${new Date(orderData.timestamp).toLocaleDateString()}</strong>
+                    </div>
+                    <div class="order-total">
+                        <strong>Total: $${total.toFixed(2)}</strong>
+                    </div>
+                </div>
+                
+                <div class="shipping-info">
+                    <h3>Shipping Address:</h3>
+                    <p>${orderData.customer.fullName}</p>
+                    <p>${orderData.customer.address.street}</p>
+                    <p>${orderData.customer.address.city}, ${orderData.customer.address.state} ${orderData.customer.address.zip}</p>
+                </div>
+                
+                <div class="order-items">
+                    <h3>Items Ordered:</h3>
+                    ${orderData.items.map(item => `
+                        <div class="success-item">
+                            <span>${item.name}</span>
+                            <span>Qty: ${item.quantity}</span>
+                            <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="delivery-info">
+                    <p><strong>Estimated Delivery:</strong> 3-5 business days</p>
+                    <p><strong>Tracking:</strong> A tracking number will be sent to ${orderData.customer.email}</p>
+                </div>
+            `;
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // Initialize page
+        displayOrderDetails();
+        updateCartCount();
+    </script>
+
+    <style>
+        .success-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-content h1 {
+            color: #2ed573;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-content > p {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .order-details {
+            text-align: left;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .order-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .shipping-info, .order-items, .delivery-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .shipping-info h3, .order-items h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .success-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .success-item:last-child {
+            border-bottom: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .continue-shopping-btn, .home-btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .continue-shopping-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .home-btn {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #e9ecef;
+        }
+
+        .continue-shopping-btn:hover, .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .no-order {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .delivery-info {
+            background: #e8f5e8;
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #2ed573;
+        }
+
+        @media (max-width: 768px) {
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .order-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

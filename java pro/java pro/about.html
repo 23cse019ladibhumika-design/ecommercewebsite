@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Varnikaa</title>
+  <link rel="stylesheet" href="varnikaa.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="nav">
+    <h2 style="color: brown;">Varnikaa</h2>
+    <a href="eccom.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="shop.html">Shop</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+    <i id="darkModeToggle" class="fas fa-moon" style="margin-left:auto; cursor:pointer;"></i>
+  </div>
+
+  <!-- About Section -->
+  <section style="padding:40px; text-align:center;">
+    <h1>About Varnikaa</h1>
+    <p style="max-width:800px; margin:auto; font-size:18px;">
+      Welcome to <b>Varnikaa</b>, your one-stop destination for elegant fashion, ethnic wear, 
+      and timeless jewellery. We believe in blending tradition with modern styles, 
+      bringing you the best collection of sarees, kurtas, accessories and more.
+    </p>
+    <img src="https://images.unsplash.com/photo-1520975698519-59b2b3b43a71?w=1200" 
+         alt="Our Store" style="margin-top:30px; width:80%; border-radius:10px;">
+  </section>
+
+  <!-- Footer -->
+  <div class="footer"> ...same footer as eccom.html... </div>
+
+  <script>
+    const toggleIcon = document.getElementById("darkModeToggle");
+    toggleIcon.addEventListener("click",()=>{document.body.classList.toggle("dark-mode");});
+  </script>
+</body>
+</html>

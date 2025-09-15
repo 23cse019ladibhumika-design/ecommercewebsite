@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - Varnikaa</title>
+  <link rel="stylesheet" href="varnikaa.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="nav">
+    <h2 style="color:brown;">Varnikaa</h2>
+    <a href="eccom.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="shop.html">Shop</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+    <i id="darkModeToggle" class="fas fa-moon" style="margin-left:auto; cursor:pointer;"></i>
+  </div>
+
+  <section class="fashion">
+    <h1 class="section-title">Shop Our Collection</h1>
+    <div class="fabox">
+      <a href="saree.html"><img src="https://images.unsplash.com/photo-1621509076112-f0dbf41d079f?w=500"></a>
+      <p>Banarasi Saree - ₹2,999</p>
+    </div>
+    <div class="fabox">
+      <a href="ring.html"><img src="https://images.unsplash.com/photo-1600185364811-df98f77b9054?w=500"></a>
+      <p>Platinum Ring - ₹4,499</p>
+    </div>
+    <div class="fabox">
+      <a href="kurta.html"><img src="https://images.unsplash.com/photo-1520975922320-7f5e3d2a8e28?w=500"></a>
+      <p>Women Kurta-Set - ₹1,799</p>
+    </div>
+    <div class="fabox">
+      <a href="neck.html"><img src="https://images.unsplash.com/photo-1603570419874-3ff9eaf56ac6?w=500"></a>
+      <p>Necklace - ₹3,299</p>
+    </div>
+  </section>
+
+  <div class="footer"> ...same footer... </div>
+
+  <script>
+    const toggleIcon=document.getElementById("darkModeToggle");
+    toggleIcon.addEventListener("click",()=>{document.body.classList.toggle("dark-mode");});
+  </script>
+</body>
+</html>
